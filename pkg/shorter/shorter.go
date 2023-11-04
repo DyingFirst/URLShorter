@@ -1,21 +1,13 @@
-package shorter_repository
+package shorter
 
 import (
-	"URLShorter/internal/product"
 	"crypto/sha256"
 	"math/big"
 )
 
-type ShorterRepository struct {
-}
-
-func NewShorterRepo() product.ShorterRepository {
-	return &ShorterRepository{}
-}
-
 const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"
 
-func (l *ShorterRepository) URLToID(url string) string {
+func URLToID(url string) string {
 	hash := sha256.Sum256([]byte(url))
 	intValue := new(big.Int).SetBytes(hash[:])
 	return base62Encode(intValue)[:10]

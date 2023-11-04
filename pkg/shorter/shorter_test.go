@@ -1,4 +1,4 @@
-package shorter_repository
+package shorter
 
 import (
 	"testing"
@@ -14,11 +14,9 @@ func TestURLToID(t *testing.T) {
 		{"https://www.example.net", "BvToCBk1Cr"},
 	}
 
-	repo := NewShorterRepo()
-
 	for _, test := range tests {
 		t.Run(test.input, func(t *testing.T) {
-			actual := repo.URLToID(test.input)
+			actual := URLToID(test.input)
 			if actual != test.expected {
 				t.Errorf("URLToID(%s) = %s; want %s", test.input, actual, test.expected)
 			}
