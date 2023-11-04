@@ -1,9 +1,8 @@
-package validate_repository
+package validate
 
 import "testing"
 
 func TestValidateURL_ValidURL(t *testing.T) {
-	repo := NewValidateRepo()
 
 	validURLs := []string{
 		"https://www.example.com",
@@ -12,15 +11,13 @@ func TestValidateURL_ValidURL(t *testing.T) {
 	}
 
 	for _, url := range validURLs {
-		if !repo.ValidateURL(url) {
+		if !ValidateURL(url) {
 			t.Errorf("Expected URL to be valid: %s", url)
 		}
 	}
 }
 
 func TestValidateURL_InvalidURL(t *testing.T) {
-	repo := NewValidateRepo()
-
 	invalidURLs := []string{
 		"ftp://example.com",
 		"htp://example.com",
@@ -29,7 +26,7 @@ func TestValidateURL_InvalidURL(t *testing.T) {
 	}
 
 	for _, url := range invalidURLs {
-		if repo.ValidateURL(url) {
+		if ValidateURL(url) {
 			t.Errorf("Expected URL to be invalid: %s", url)
 		}
 	}
