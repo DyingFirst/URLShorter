@@ -2,7 +2,4 @@ module URLShorter
 
 go 1.20
 
-require (
-	github.com/sirupsen/logrus v1.9.3 // indirect
-	golang.org/x/sys v0.13.0 // indirect
-)
+require github.com/caarlos0/env/v9 v9.0.0
