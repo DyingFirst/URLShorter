@@ -25,6 +25,7 @@ services:
       APP_PORT: 8080
       REDIS_CONN_URL: ""
       PG_CONN_URL: ""
+      USE_ONLY_IN_MEMORY_STORAGE: ""
     ports:
       - "8080:8080"
 
