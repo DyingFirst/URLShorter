@@ -4,6 +4,7 @@ import (
 	"URLShorter/internal/product"
 	"context"
 	"github.com/jackc/pgx/v5"
+	"time"
 )
 
 type PGRepo struct {
@@ -15,7 +16,9 @@ func NewPGRepo(db *pgx.Conn) product.PGRepo {
 }
 
 func (pg *PGRepo) NewValue(ctx context.Context, ShortURL string, OriginalURL string) error {
-	_, err := pg.db.Exec(ctx, querySetOriginalUrlByID, OriginalURL, ShortURL)
+	Now := time.Now()
+	UpdateDate := Now.Add(time.Hour)
+	_, err := pg.db.Exec(ctx, querySetOriginalUrlByID, OriginalURL, ShortURL, UpdateDate)
 	return err
 }
 func (pg *PGRepo) GetValue(ctx context.Context, ShortURL string) (string, error) {
