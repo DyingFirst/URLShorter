@@ -1,9 +1,9 @@
 CREATE TABLE original_url_and_shorted_id_list (
-    id BIGINT PRIMARY KEY,
-    original_url TEXT,
-    shorted_id VARCHAR(10) UNIQUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_at TIMESTAMP
+    id SERIAL PRIMARY KEY,
+    original_url TEXT NOT NULL,
+    shorted_id VARCHAR(10) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    update_at TIMESTAMP NOT NULL
 );
 
 
