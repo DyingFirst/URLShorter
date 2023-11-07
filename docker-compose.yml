@@ -1,0 +1,51 @@
+version: '3.7'
+
+services:
+  postgres:
+    build: dockerfiles/pg_storage
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: designer
+      POSTGRES_PASSWORD: gh5vMBSuLThnaZWrKf
+      POSTGRES_DB: shoredurls
+    networks:
+      - backend
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    networks:
+      - backend
+
+  go-app:
+    build: ./
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      APP_PORT: 8080
+      GRPC_PORT: 9090
+      REDIS_CONN_URL: redis:6379
+      PG_CONN_URL: postgres://designer:gh5vMBSuLThnaZWrKf@postgres/shoredurls?sslmode=disable
+      USE_MEMORY_STORAGE: true
+      USE_OUT_MEMORY_STORAGE: true
+    ports:
+      - "8080:8080"
+      - "9090:9090"
+    restart: always
+    networks:
+      - backend
+
+volumes:
+  pgdata:
+  redisdata:
+
+networks:
+  backend:
+    driver: bridge

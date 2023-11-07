@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package URLShorter;
+option go_package = "./pkg/grpc/proto/URLShorter";
+
+
+service URLShortener {
+  rpc ShortURL(ShortURLRequest) returns (ShortURLResponse);
+
+  rpc GetURL(GetURLRequest) returns (GetURLResponse);
+}
+
+message ShortURLRequest {
+  string originURL = 1;
+}
+
+message ShortURLResponse {
+  string shortURL = 1;
+}
+
+message GetURLRequest {
+  string shortURL = 1;
+}
+
+message GetURLResponse {
+  string originURL = 1;
+}

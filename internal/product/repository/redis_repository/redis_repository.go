@@ -1,17 +1,19 @@
 package redis_repository
 
 import (
-	"URLShorter/internal/product"
 	"context"
-	"github.com/redis/go-redis/v9"
 	"time"
+
+	"URLShorter/internal/product"
+
+	"github.com/redis/go-redis/v9"
 )
 
 type RedisRepo struct {
-	rdb *redis.Client
+	rdb redis.UniversalClient
 }
 
-func NewRedisRepo(rdb *redis.Client) product.RedisRepo {
+func NewRedisRepo(rdb redis.UniversalClient) product.RedisRepo {
 	return &RedisRepo{rdb: rdb}
 }
 
