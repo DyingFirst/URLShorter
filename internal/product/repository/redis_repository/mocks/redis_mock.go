@@ -8,7 +8,7 @@ import (
 )
 
 type MockRedisClient struct {
-	redis.Client
+	redis.UniversalClient
 	SetFunc  func(ctx context.Context, key string, value interface{}, expiration time.Duration) *redis.StatusCmd
 	GetFunc  func(ctx context.Context, key string) *redis.StringCmd
 	PingFunc func(ctx context.Context) *redis.StatusCmd
